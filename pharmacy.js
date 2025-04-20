@@ -1,4 +1,4 @@
-import { updateHerbalTea, updateFervex, updateMagicPill, updateDefault } from "./drugs";
+import { HerbalTea, Fervex, MagicPill, Dafalgan, Default } from "./drugs";
 
 
 export class Drug {
@@ -8,25 +8,28 @@ export class Drug {
 	  this.benefit = benefit;
 	}
 
+	// The update method determines which specific update function to call based on the drug's name.
 	update() {
 		const method = Drug.methods[this.name] || Drug.methods.default;
-		// console.log(`Updating "${this.name}"...`, method === Drug.methods.default ? "→ using default" : "→ using specific method");
 		method(this);
 	  }
 
 	  static methods = {
-		"Herbal Tea": updateHerbalTea,
-		"Fervex": updateFervex,
-		"Magic Pill": updateMagicPill,
-		default: updateDefault
+		"Herbal Tea": HerbalTea,
+		"Fervex": Fervex,
+		"Magic Pill": MagicPill,
+		"Dafalgan": Dafalgan,
+		default: Default
 	  };
-}
+
+	}
 
 export class Pharmacy {
 	constructor(drugs = []) {
 	  this.drugs = drugs;
 	}
 
+	// This triggers the appropriate update logic (based on the drug's name) for each drug.
 	updateBenefitValue() {
 		this.drugs.forEach(drug => drug.update());
 		return this.drugs;

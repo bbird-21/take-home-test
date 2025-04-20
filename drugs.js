@@ -1,4 +1,5 @@
 /* This file contains the update functions for each Drug used by the Pharmacy. */
+/* We assume the drug object is properly constructed with valid values */
 
 export function HerbalTea(drug) {
 	drug.expiresIn -= 1;
